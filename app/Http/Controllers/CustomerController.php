@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Customer;
+use Illuminate\Database\Eloquent\Collection;
 
 class CustomerController extends Controller
 {
     public function index()
     {
-
+        return view('customers', [
+            'customers' => Customer::all()
+        ]);
     }
 
     public function add()
