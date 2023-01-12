@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use Illuminate\Database\Eloquent\Collection;
 
 class CustomerController extends Controller
 {
@@ -24,9 +23,9 @@ class CustomerController extends Controller
 
     }
 
-    public function show()
+    public function show(Customer $customer)
     {
-
+        return view('customer', compact('customer'));
     }
 
     public function edit()
