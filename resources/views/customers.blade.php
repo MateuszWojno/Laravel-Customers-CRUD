@@ -24,7 +24,7 @@
                                     @foreach($customers as $customer)
                                         <th scope="row">{{ $customer->id }}</th>
                                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
-                                        <td><a href="#" class="btn btn-success" role="button">Details</a></td>
+                                        <td><a href="{{ route('customers.show', ['customer' => $customer->id]) }}" class="btn btn-success" role="button">Details</a></td>
                                         <td><a href="#" class="btn btn-info" role="button">Update</a></td>
                                         <td><a href="#" class="btn btn-danger" role="button">Delete</a></td>
 
@@ -38,7 +38,5 @@
             </div>
         </div>
     </section>
-
-
 
 @endsection
