@@ -15,4 +15,12 @@ class Customer extends Model
         'email',
         'phone_number'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
 }
+
+
