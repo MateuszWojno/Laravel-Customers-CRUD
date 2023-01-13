@@ -28,18 +28,19 @@ class CustomerController extends Controller
         return view('customer', compact('customer'));
     }
 
-    public function edit()
+    public function edit(Customer $customer)
     {
 
     }
 
-    public function update()
+    public function update(Customer $request, $id)
     {
 
     }
 
-    public function delete()
+    public function delete(Customer $customer)
     {
-
+        $customer->delete();
+        return redirect()->route('customers.index')->with('deleteMessage', 'User successfully deleted');
     }
 }
