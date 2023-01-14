@@ -9,6 +9,11 @@
                     <div class="card rounded-3">
                         <div class="card-body p-4">
                             <h4 class="text-center my-3 pb-3">List of customers</h4>
+                            <div>
+                                <a href="{{ route('customers.add') }}"
+                                   class="btn btn-secondary" role="button">Add customer</a>
+                            </div>
+
                             @if(session('deleteMessage'))
                                 <h1 class="text-dark text-center bg-success"> {{ session('deleteMessage') }}</h1>
                             @endif
