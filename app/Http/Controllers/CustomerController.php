@@ -36,8 +36,13 @@ class CustomerController extends Controller
         return view('edit', compact('customer'));
     }
 
-    public function update()
+    public function update(CustomerRequest $request, Customer $customer)
     {
+        $data = $request->validated();
+        $customer->fill($data);
+        $customer->save();
+
+        return redirect()->route('customers.index')->with('updateMessage', 'Customer data successfully updated');
     }
 
     public function delete(Customer $customer)
