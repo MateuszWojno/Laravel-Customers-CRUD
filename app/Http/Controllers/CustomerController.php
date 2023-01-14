@@ -15,12 +15,11 @@ class CustomerController extends Controller
 
     public function add()
     {
-
+        return view('add');
     }
 
     public function store()
     {
-
     }
 
     public function show(Customer $customer)
@@ -30,10 +29,10 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-
+        return view('edit', compact('customer'));
     }
 
-    public function update(Customer $request, $id)
+    public function update()
     {
 
     }
@@ -41,6 +40,6 @@ class CustomerController extends Controller
     public function delete(Customer $customer)
     {
         $customer->delete();
-        return redirect()->route('customers.index')->with('deleteMessage', 'User successfully deleted');
+        return redirect()->route('customers.index')->with('deleteMessage', ' successfully deleted');
     }
 }
