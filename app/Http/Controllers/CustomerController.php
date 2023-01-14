@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 
 class CustomerController extends Controller
@@ -18,8 +19,11 @@ class CustomerController extends Controller
         return view('add');
     }
 
-    public function store()
+    public function store(CustomerRequest $request)
     {
+        Customer::create($request->validated());
+
+        return redirect()->route('customers.index')->with('updateMessage', 'Customer data successfully updated');
     }
 
     public function show(Customer $customer)
@@ -34,7 +38,6 @@ class CustomerController extends Controller
 
     public function update()
     {
-
     }
 
     public function delete(Customer $customer)
