@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
+use App\Models\User;
+use App\Notifications\EmailNotification;
 
 class CustomerController extends Controller
 {
+
     public function index()
     {
         return view('customers', [
@@ -21,6 +24,23 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
+        $users = User::where('role', 'Admin')->get();
+
+        $project = [
+            'greeting'     => 'Hi Admin, this customer join to our platform',
+            'first_name'   => 'First name: ' . $request->input('first_name'),
+            'last_name'    => 'Last name: ' . $request->input('last_name'),
+            'email'        => 'Email: ' . $request->input('email'),
+            'phone_number' => 'Phone number: ' . $request->input('phone_number'),
+            'actionText'   => 'View list of customers',
+            'actionURL'    => url('/customers'),
+            'thanks'       => 'Thank you '
+        ];
+
+        foreach ($users as $user) {
+            $user->notify(new EmailNotification($project));
+        }
+
         Customer::create($request->validated());
 
         return redirect()->route('customers.index')->with('updateMessage', 'Customer data successfully updated');
@@ -28,6 +48,8 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
+        User::where('role', 'Admin')->exists();
+
         return view('customer', compact('customer'));
     }
 
