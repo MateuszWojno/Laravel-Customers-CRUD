@@ -26,7 +26,7 @@ class CustomerController extends Controller
     {
         $users = User::where('role', 'Admin')->get();
 
-        $project = [
+        $customer = [
             'greeting'     => 'Hi Admin, this customer join to our platform',
             'first_name'   => 'First name: ' . $request->input('first_name'),
             'last_name'    => 'Last name: ' . $request->input('last_name'),
@@ -38,7 +38,7 @@ class CustomerController extends Controller
         ];
 
         foreach ($users as $user) {
-            $user->notify(new EmailNotification($project));
+            $user->notify(new EmailNotification($customer));
         }
 
         Customer::create($request->validated());
