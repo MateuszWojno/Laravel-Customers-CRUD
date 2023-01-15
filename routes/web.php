@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/customers')->group(function () {
-
-
     Route::get('/', 'App\Http\Controllers\CustomerController@index')->name('customers.index');
 
     Route::get('/add', 'App\Http\Controllers\CustomerController@add')->name('customers.add');
@@ -29,5 +27,8 @@ Route::prefix('/customers')->group(function () {
     Route::put('/{customer}', 'App\Http\Controllers\CustomerController@update')->name('customers.update');
 
     Route::delete('/{customer}', 'App\Http\Controllers\CustomerController@delete')->name('customers.delete');
-
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
