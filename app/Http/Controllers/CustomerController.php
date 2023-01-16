@@ -43,7 +43,7 @@ class CustomerController extends Controller
 
         Customer::create($request->validated());
 
-        return redirect()->route('customers.index')->with('updateMessage', 'Customer data successfully updated');
+        return redirect()->route('customers.index')->with('createMessage', 'Customer successfully created');
     }
 
     public function show(Customer $customer)

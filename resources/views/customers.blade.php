@@ -17,6 +17,9 @@
                             @if(session('deleteMessage'))
                                 <h1 class="text-dark text-center bg-success"> {{ session('deleteMessage') }}</h1>
                             @endif
+                            @if(session('createMessage'))
+                                <h1 class="text-dark text-center bg-success"> {{ session('createMessage') }}</h1>
+                            @endif
 
                             <table class="table">
                                 <thead>
@@ -33,7 +36,7 @@
                                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
                                         <td><a href="{{ route('customers.show', ['customer' => $customer->id]) }}"
                                                class="btn btn-success" role="button">Details</a></td>
-                                        @if(Auth::user()->isAdmin())
+
                                             <td><a href="{{ route('customers.edit', ['customer' => $customer->id]) }}"
                                                    class="btn btn-info" role="button">Update</a></td>
                                             <form
@@ -43,7 +46,7 @@
                                                 @method("DELETE")
                                                 <td><input class="btn btn-danger" type="submit" value="Delete"/></td>
                                             </form>
-                                        @endif
+
 
                                 </tr>
                                 @endforeach
