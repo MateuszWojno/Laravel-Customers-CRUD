@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -22,5 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function isAdmin()
+    {
+        if (session('role') === 'Admin') {
+            return true;
+        }
+        return false;
+    }
 
 }

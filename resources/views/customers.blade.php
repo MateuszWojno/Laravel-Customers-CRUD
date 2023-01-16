@@ -25,17 +25,20 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">Name customer</th>
-                                    <th scope="col">Details</th>
-                                    <th scope="col">Update</th>
-                                    <th scope="col">Delete</th>
+                                    @if(auth()->user()->isAdmin())
+                                        <th scope="col">Details</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Delete</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     @foreach($customers as $customer)
                                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
-                                        <td><a href="{{ route('customers.show', ['customer' => $customer->id]) }}"
-                                               class="btn btn-success" role="button">Details</a></td>
+                                        @if(auth()->user()->isAdmin())
+                                            <td><a href="{{ route('customers.show', ['customer' => $customer->id]) }}"
+                                                   class="btn btn-success" role="button">Details</a></td>
 
                                             <td><a href="{{ route('customers.edit', ['customer' => $customer->id]) }}"
                                                    class="btn btn-info" role="button">Update</a></td>
@@ -45,6 +48,7 @@
                                                 @csrf
                                                 @method("DELETE")
                                                 <td><input class="btn btn-danger" type="submit" value="Delete"/></td>
+                                                @endif
                                             </form>
 
 
