@@ -17,10 +17,10 @@
                             @if(session('deleteMessage'))
                                 <h1 class="text-dark text-center bg-success"> {{ session('deleteMessage') }}</h1>
                             @endif
+
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">No.</th>
                                     <th scope="col">Name customer</th>
                                     <th scope="col">Details</th>
                                     <th scope="col">Update</th>
@@ -30,18 +30,20 @@
                                 <tbody>
                                 <tr>
                                     @foreach($customers as $customer)
-                                        <th scope="row">{{ $customer->id }}</th>
                                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
                                         <td><a href="{{ route('customers.show', ['customer' => $customer->id]) }}"
                                                class="btn btn-success" role="button">Details</a></td>
-                                        <td><a href="{{ route('customers.edit', ['customer' => $customer->id]) }}"
-                                               class="btn btn-info" role="button">Update</a></td>
-                                        <form action="{{ route('customers.delete', ['customer' => $customer->id]) }}"
-                                              method="POST">
-                                            @csrf
-                                            @method("DELETE")
-                                            <td><input class="btn btn-danger" type="submit" value="Delete"/></td>
-                                        </form>
+                                        @if(Auth::user()->isAdmin())
+                                            <td><a href="{{ route('customers.edit', ['customer' => $customer->id]) }}"
+                                                   class="btn btn-info" role="button">Update</a></td>
+                                            <form
+                                                action="{{ route('customers.delete', ['customer' => $customer->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method("DELETE")
+                                                <td><input class="btn btn-danger" type="submit" value="Delete"/></td>
+                                            </form>
+                                        @endif
 
                                 </tr>
                                 @endforeach
